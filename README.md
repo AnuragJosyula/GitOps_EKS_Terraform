@@ -67,5 +67,4 @@ To ensure maximum security of your AWS environment, the following measures are i
 3. **S3 Backend**: Terraform state is stored securely in an S3 bucket (`dante-bucket-tfstate`) rather than locally.
 4. **Git Ignore Protections**: This repository explicitly ignores `.terraform/`, `*.tfstate`, `*.tfplan`, and `*.tfvars` files to ensure sensitive AWS access keys, tokens, or infrastructure state are **never** accidentally pushed to GitHub.
 
----
-*Created via automation for a robust, decoupled GitOps workflow.*
+
