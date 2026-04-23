@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/AnuragJosyula/GitOps_EKS_Terraform.git
     targetRevision: master
-    path: GitOPS_application/argocd-application-configs
+    path: manifests/application
   destination:
     server: https://kubernetes.default.svc
     namespace: 3tierwebapp-dev
