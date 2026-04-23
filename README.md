@@ -1,6 +1,6 @@
 # GitOps AWS EKS Terraform Deployment
 
-![GitOps Architecture](C:\Users\anura\.gemini\antigravity\brain\9ca97cad-a25a-4e08-a348-d9368ea7edd8\gitops_architecture_diagram_1776983395527.png)
+![GitOps Architecture](assets/gitops_architecture_diagram.png)
 
 This repository contains everything you need to automatically provision a production-ready AWS EKS cluster and configure a fully automated GitOps workflow using ArgoCD for a 3-tier web application.
 
