@@ -23,7 +23,7 @@ images:
 
 replicas:
   - name: frontend
-    count: 2
+    count: 3
   - name: backend
     count: 2
   - name: postgres

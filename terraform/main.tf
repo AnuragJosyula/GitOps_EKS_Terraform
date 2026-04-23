@@ -42,6 +42,8 @@ module "eks" {
     subnet_ids   = module.vpc.private_subnets
     control_plane_subnet_ids = module.vpc.private_subnets
 
+    cluster_endpoint_public_access = true
+
     eks_managed_node_groups = {
         initial = {
             instance_types = ["t3.medium"]
@@ -115,8 +117,10 @@ resource "kubectl_manifest" "argocd" {
     sha256(doc) => doc if trimspace(doc) != "" 
   }
 
-  yaml_body = each.value
+  yaml_body          = each.value
   override_namespace = "argocd"
+  server_side_apply  = true
+  force_conflicts    = true
 
   depends_on = [kubernetes_namespace_v1.argocd]
 }
@@ -124,15 +128,11 @@ resource "kubectl_manifest" "argocd" {
 # Patch ArgoCD server service to LoadBalancer
 resource "null_resource" "patch_argocd_service" {
   provisioner "local-exec" {
-    command = <<-EOT
-      # Update kubeconfig first
+    interpreter = ["PowerShell", "-Command"]
+    command     = <<-EOT
       aws eks update-kubeconfig --region ${var.region} --name ${module.eks.cluster_name}
-      
-      # Wait a bit for service to be created
-      sleep 10
-      
-      # Patch service to LoadBalancer (ignore errors if already patched)
-      kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}' || true
+      Start-Sleep -Seconds 10
+      kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
     EOT
   }
 
