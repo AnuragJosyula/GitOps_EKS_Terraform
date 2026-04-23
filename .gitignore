@@ -12,8 +12,7 @@ override.tf.json
 *_override.tf
 *_override.tf.json
 
-# GitOPS_application (separate repo)
-GitOPS_application/
+# GitOPS_application (integrated into this repo)
 
 # IDE
 .vscode/
